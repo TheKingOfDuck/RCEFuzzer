@@ -1,8 +1,11 @@
 # RCEFuzzer
 find your rce
 
+## 下载使用
 
-# 配置说明
+[https://github.com/TheKingOfDuck/RCEFuzzer/releases/tag/0.5](https://github.com/TheKingOfDuck/RCEFuzzer/releases/tag/0.5)
+
+## 配置说明
 
 ```
 
