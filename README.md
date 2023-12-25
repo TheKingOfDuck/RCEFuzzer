@@ -5,6 +5,10 @@
 
 [https://github.com/TheKingOfDuck/RCEFuzzer/releases/tag/0.5](https://github.com/TheKingOfDuck/RCEFuzzer/releases/tag/0.5)
 
+## 参考链接
+
+[RCEFuzzer - 被动扫描与fuzz上一些思路的实现](https://mp.weixin.qq.com/s/NYGBUWY820TDfnaHldxuow)
+
 ## 基本介绍
 
 这是一个以fuzz为中心思想的被动扫描工具(该版本是BURP插件,并非独立工具)，多数扫描器的工作逻辑是以已知漏洞去冲目标，然后根据条件判断是否存在这个已知的漏洞；rcefuzzer的工作逻辑是以通用payload去污染目标的参数，然后根据条件判断是否存在未知漏洞。
