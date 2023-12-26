@@ -58,10 +58,10 @@ ${jndi:ldap://dnslog/log4j}
 config:
   version: |  # 插件版本
     0.5
-  twebdomain: | # tweb 子域名配置
-    xxx.xx.com
-  twebapi: |  # tweb api配置 其中KEY为展位符,在新旧版本的tweb均可在Profile页面找到
-    https://admin.xxxx.com/logs?token=xxxxxx&type=dns&q=KEY
+  twebdomain: | # tweb 子域名配置 
+    xxxx.ceye.io
+  twebapi: |  # tweb api配置 其中KEY为展位符,在新旧版本的tweb均可在Profile页面找到。ceye只是举例 ，实际上任何dnslog平台，只要有api可以get查询log即可
+    http://api.ceye.io/v1/records?token=xxxx&type=dns&filter=KEY
   timeout: |  # 扫描过程中的超时配置 非tweb请求超时设置 单位毫秒 60000为60秒
     60000
   hostBlacklistReg: |  # 禁止扫描的域名列表
